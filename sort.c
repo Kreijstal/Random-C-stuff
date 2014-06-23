@@ -20,12 +20,9 @@ typedef struct {
 } Arr;
 
 void initArray(Arr *a, size_t initialSize,size_t SIZEOF) {
-//    printf("wowowwwwwwowo/n");
   a->sizeofThing=SIZEOF;
   a->array = (void *)malloc(initialSize * a->sizeofThing);
   a->used = 0;
-//  printf("hey hey hey");
-//  printf("firsteeeeeeeeeeeeeeeee a.used is %d\n",a->used);
   a->size = initialSize;
 }
 
@@ -33,19 +30,15 @@ void appendArray(Arr *a,void *elements,size_t length);
 void initAppend(Arr *a,char*string){
     size_t length=strlen(string)+1;
     initArray(a,length,sizeof(char));
-   // printf("Hello, I'm here: %s, and length is %d\n", string,length);printf("b4 calling appendArray .used is %d\n",a->used);
     appendArray(a,(void*)string, length);
 }
 void appendArrays(Arr *a,char *string){
     
     size_t length=strlen(string)+1;
-//printf("a.used is %d\n",a->used);
 appendArray(a,(void*)string, length);
-//printf("Hello, I'm here: %s, and length is %d\n", string,length);
 }  
 void appendArray(Arr *a,void *elements,size_t length){
 void *tmpalloc;
-//printf("after calling appendarray a.used is %d\n",a->used);
 if (a->used+length > a->size) {
 a->size=a->used+length*2;
 tmpalloc = (void *)realloc(a->array, a->size * a->sizeofThing);
@@ -56,10 +49,7 @@ if(tmpalloc==NULL){
   }else{
   a->array=tmpalloc;  }
   }
-//printf("dumping: elements %s, a.used is %d\n",elements,a->used);
   memcpy(a->array+(a->used*a->sizeofThing),elements,length*a->sizeofThing);
-//printf("dumping: a->array %s\n",a->array);
-
   a->used+=length;
 }
 void insertArray(Arr *a, void* element) {
@@ -102,30 +92,13 @@ int main(int argc,char *argv[]) {
         unsigned char _ignoreLeadingBlanks:1, _dictionaryOrder:1, _ignoreCase:1, _generalNumericSort:1, _ignoreNonprinting:1, _monthSort:1, _humanNumericSort:1, _numericSort:1, _randomSort:1, _reverse:1, _versionSort:1, _debug:1, _merge:1, _stable:1, _parallel:1, _unique:1, _zeroTerminated:1, _help:1, _version:1; 
         //18 bytes reduced to 3 bytes, sounds good to me.
     } flags;
-printf("sizeof pointer is %d\nsize of flags is %d\nsize of _ignoreLeadingetc is %d\n",sizeof(void*),sizeof(flags),sizeof(flags._ignoreLeadingBlanks));    
 
-/*SANDBOX PLZ DELETE
-
-puts("SANDBOX START\n");
-flags.FLAGS=calloc((__LENGTH/CHAR_BIT)+(__LENGTH%CHAR_BIT?1:0),sizeof(char));
-printf("CHAR BIT:%d, __LENGTH:%d, __LENGTH/CHAR_BIT:%d\n",CHAR_BIT,__LENGTH,(__LENGTH/CHAR_BIT)+(__LENGTH%CHAR_BIT?1:0));
-flags.FLAGS[0]=(char)198;
-printf("FLAGS[0]: %hhu",flags.FLAGS[_numericSort/CHAR_BIT]);
-printf("FLAGS[0]: %d\n",getBit(flags.FLAGS,_monthSort));
-printf("DAMMIT JUST WORK\n");
-printf("SANDBOX END\n");/**/
 int i,p;
 char **parameters,*parameter; 
 Arr dynamicString;
-//dynamicString=Arr;//"fagets"
+
 initArray(&dynamicString, argc,sizeof(Arr));
-printf("DAMMIT JUST WORK");
-/*dynamicString.used--;
-appendArrays(&dynamicString,",lol, no u");
-puts((char *)dynamicString.array);
-printf("excuse me");
-free(dynamicString.array);*/
-printf("DAMMIT JUST WORK");
+
 for( i = 0; i < argc; i++ )
 {
     Arr goddamit;
@@ -133,11 +106,6 @@ for( i = 0; i < argc; i++ )
     printf("%s %p\n",goddamit.array,goddamit);
     insertArray(&dynamicString,&goddamit);
 }
-//free(goddamit);
-//      getchar();
-//parameters=(char**)dynamicString.array;
-//printf((dynamicString.array));
-//printf("Print attempt %s",((Arr*)dynamicString.array)[0].array);
 for(i=0;i<dynamicString.used;i++){
     printf("%s", (char*)((Arr*)dynamicString.array)[i].array);
 }
